@@ -686,8 +686,8 @@ comments:
 # 更多配置信息请参考：
 # LiveRe comments system
 # You can get your uid from https://livere.com/
-# livere:
-#   uid: # <your_uid>
+livere:
+  uid: # <your_uid>
 
 # Utterances 评论插件
 # 更多配置信息请参考：https://utteranc.es
