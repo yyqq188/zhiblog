@@ -329,37 +329,37 @@ postMeta:
 
 # 文章底部的设置
 # Post footer settings
-# postFooter:
-#   # 通过线条将文章和捐赠等信息隔开，并在线条上添加提示信息
-#   # Use line to separate post and reward etc other information
-#   # and add tip title on line.
-#   endLineTip: "~ 我可是有底线的哟 ~"
-#   # 是否使用小图标，默认使用 # 符号表示标签
-#   # Use icon instead of the symbol # to indicate the tag
-#   tagIcon: true
+postFooter:
+  # 通过线条将文章和捐赠等信息隔开，并在线条上添加提示信息
+  # Use line to separate post and reward etc other information
+  # and add tip title on line.
+  endLineTip: "~ 我可是有底线的哟 ~"
+  # 是否使用小图标，默认使用 # 符号表示标签
+  # Use icon instead of the symbol # to indicate the tag
+  tagIcon: true
 
 # 捐赠信息设置
 # Donate (Sponsor) settings.
-# rewardSets:
-#   # 是否开启捐赠按钮，开启后将在每个文章页面底部显示
-#   # If true, a donate button will be displayed 
-#   # in every article by default.
-#   enable: true
-#   # 是否开启捐赠方式的动画效果
-#   # If true, the donate type title will with animation.
-#   animation: true
-#   # 捐赠信息的描述，支持 HTML 语法
-#   # Comment for donate and suppport HTML syntax
-#   comment: '<i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))'
-#   # 捐赠方式
-#   # 用例： `名称:图像地址`
-#   # Donate type
-#   # Usage: `name:image url`
-#   reward:
-#     wechatpay: /imgs/wechat-pay.png
-#     alipay: /imgs/ali-pay.png
-#     #paypal: /images/paypal.png
-#     #bitcoin: /images/bitcoin.png
+rewardSets:
+  # 是否开启捐赠按钮，开启后将在每个文章页面底部显示
+  # If true, a donate button will be displayed 
+  # in every article by default.
+  enable: true
+  # 是否开启捐赠方式的动画效果
+  # If true, the donate type title will with animation.
+  animation: true
+  # 捐赠信息的描述，支持 HTML 语法
+  # Comment for donate and suppport HTML syntax
+  comment: '<i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))'
+  # 捐赠方式
+  # 用例： `名称:图像地址`
+  # Donate type
+  # Usage: `name:image url`
+  reward:
+    wechatpay: /imgs/wechat-pay.png
+    alipay: /imgs/ali-pay.png
+    #paypal: /images/paypal.png
+    #bitcoin: /images/bitcoin.png
 
 # 提供其它订阅站点文章的方式
 # 用例： `key: 名称 || 链接（图像地址）|| icon名称`
