@@ -164,7 +164,7 @@ siteState:
 socials: 
   social0: Github || https://github.com/yyqq188 || fab fa-github
   #social1: E-Mail || mailto:yourname@gmail.com || fa fa-envelope
-  social2: 本站 || https://zhiblog.top || fa fa-book
+  social2: 本站 || https:// || fa fa-book
   #Google: https://plus.google.com/yourname || fab fa-google
   #Twitter: https://twitter.com/yourname || fab fa-twitter
   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
@@ -204,9 +204,9 @@ socialIcons:
 # 用法： `Key: 显示名称 || 链接地址`
 # Links of your friends
 # Usage: `Key: name || permalink`
-# links: 
-#   link0: Hugo-NexT || https://gitee.com/hugo-next/hugo-theme-next
-#   link1: 凡梦星尘空间站 || https://lisenhui.cn
+links: 
+  link0: Hugo-NexT || https://gitee.com/hugo-next/hugo-theme-next
+  link1: 凡梦星尘空间站 || https://lisenhui.cn
 
 # 文章目录显示
 # Table of Contents in the Sidebar
@@ -266,37 +266,37 @@ footer:
   # 国内 ICP 备案和公安网备信息
   # Beian ICP and gongan information for Chinese users. 
   # See: https://beian.miit.gov.cn, http://www.beian.gov.cn
-  # beian:
-  #   enable: true
-  #   # ICP 备案的具体信息
-  #   icp: 粤ICP备 18047355-1 号
-  #   # 公安网备的省份简称
-  #   provinceAbbr: 沪
-  #   # 公安网备案号
-  #   gonganNum: 31011402009770
+  beian:
+    enable: true
+    # ICP 备案的具体信息
+    icp: 粤ICP备 18047355-1 号
+    # 公安网备的省份简称
+    provinceAbbr: 沪
+    # 公安网备案号
+    gonganNum: 31011402009770
 
   # 站点支持供应商列表
   # Vendors list who support website. 
-  # vendors:
-  #   enable: true
-  #   # 支持说明
-  #   # Some support information description.
-  #   title: 提供CDN/云资源支持
-  #   # 供应商列表，请将带有图标的供应商放在前面
-  #   # Vendors list, remember that who with logo image need put in top.
-  #   list:
-  #     - name: Vercel
-  #       image: 
-  #         url: /imgs/vendors/vercel.svg
-  #         width: 50
-  #       link: https://vercel.com
-  #     - name: 又拍云
-  #       image: 
-  #         url: /imgs/vendors/upyun.png
-  #         width: 43
-  #       link: https://upyun.com
-  #     - name: Webify
-  #       link: https://webify.cloudbase.net
+  vendors:
+    enable: true
+    # 支持说明
+    # Some support information description.
+    title: 提供CDN/云资源支持
+    # 供应商列表，请将带有图标的供应商放在前面
+    # Vendors list, remember that who with logo image need put in top.
+    list:
+      - name: Vercel
+        image: 
+          url: /imgs/vendors/vercel.svg
+          width: 50
+        link: https://vercel.com
+      - name: 又拍云
+        image: 
+          url: /imgs/vendors/upyun.png
+          width: 43
+        link: https://upyun.com
+      - name: Webify
+        link: https://webify.cloudbase.net
 
 
 # ---------------------------------------------------------------
@@ -329,37 +329,37 @@ postMeta:
 
 # 文章底部的设置
 # Post footer settings
-# postFooter:
-#   # 通过线条将文章和捐赠等信息隔开，并在线条上添加提示信息
-#   # Use line to separate post and reward etc other information
-#   # and add tip title on line.
-#   endLineTip: "~ 我可是有底线的哟 ~"
-#   # 是否使用小图标，默认使用 # 符号表示标签
-#   # Use icon instead of the symbol # to indicate the tag
-#   tagIcon: true
+postFooter:
+  # 通过线条将文章和捐赠等信息隔开，并在线条上添加提示信息
+  # Use line to separate post and reward etc other information
+  # and add tip title on line.
+  endLineTip: "~ 我可是有底线的哟 ~"
+  # 是否使用小图标，默认使用 # 符号表示标签
+  # Use icon instead of the symbol # to indicate the tag
+  tagIcon: true
 
 # 捐赠信息设置
 # Donate (Sponsor) settings.
-# rewardSets:
-#   # 是否开启捐赠按钮，开启后将在每个文章页面底部显示
-#   # If true, a donate button will be displayed 
-#   # in every article by default.
-#   enable: true
-#   # 是否开启捐赠方式的动画效果
-#   # If true, the donate type title will with animation.
-#   animation: true
-#   # 捐赠信息的描述，支持 HTML 语法
-#   # Comment for donate and suppport HTML syntax
-#   comment: '<i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))'
-#   # 捐赠方式
-#   # 用例： `名称:图像地址`
-#   # Donate type
-#   # Usage: `name:image url`
-#   reward:
-#     wechatpay: /imgs/wechat-pay.png
-#     alipay: /imgs/ali-pay.png
-#     #paypal: /images/paypal.png
-#     #bitcoin: /images/bitcoin.png
+rewardSets:
+  # 是否开启捐赠按钮，开启后将在每个文章页面底部显示
+  # If true, a donate button will be displayed 
+  # in every article by default.
+  enable: true
+  # 是否开启捐赠方式的动画效果
+  # If true, the donate type title will with animation.
+  animation: true
+  # 捐赠信息的描述，支持 HTML 语法
+  # Comment for donate and suppport HTML syntax
+  comment: '<i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))'
+  # 捐赠方式
+  # 用例： `名称:图像地址`
+  # Donate type
+  # Usage: `name:image url`
+  reward:
+    wechatpay: /imgs/wechat-pay.png
+    alipay: /imgs/ali-pay.png
+    #paypal: /images/paypal.png
+    #bitcoin: /images/bitcoin.png
 
 # 提供其它订阅站点文章的方式
 # 用例： `key: 名称 || 链接（图像地址）|| icon名称`
