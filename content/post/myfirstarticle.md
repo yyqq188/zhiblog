@@ -1,12 +1,182 @@
 ---
-title: "Myfirstarticle"
+title: "流批一体的思考和实现"
 date: 2023-06-27T09:31:28+08:00
 draft: true
 ---
 
 
 
-## 标题
-征文
----
+流批一体是面临实时和离线任务分离的情况下,一种统一处理的想法.
 
+基本上,实现流批一体有两种大的实现路径.
+
+一种是存储上做到流批的统一,很多数据湖的产品,都是基于这样的思路,将历史数据和事实数据都统一存储到同一个存储系统中.
+
+第二种就是在计算上找方法,做到计算层面上的流批一体.相对而言,这种实现的思路较上一种容易实现.将计算逻辑在上层做统一封装,在底层分别对离线和实时做分离.将计算结果在最后做统一.
+
+第二种的底层存储架构是lambda架构,同时保留离线和实时两套存储,实时只保留最近的数据.
+
+计算上需要
+
+首先指定计算范围:时间范围,表范围,列范围. 离线的计算频率
+
+其次将计算进行封装
+
+====
+
+参考我之前的做法:
+
+是数据重新写到一个新的topic种
+
+如果指定的日期很早,势必要从hive中将历史的数据导入到kafka中
+
+这样就形成新的源数据
+
+然后如果要有新的hbase维表出现,或者是有的hbase维表要重新创建新的rowkey的话,就要重新创建hbase维表,这就是涉及到hive到hbase的实时同步,这种同步不仅仅要将同步期间的数据不能丢失,而且要做到rowkey的重新组织. 同步的时候需要 指定哪些字段可以直接覆盖掉,或者是直接指定为最新的值.
+
+前提是lambda架构,有历史的数据存储在hive中.
+
+1. 驱动流 
+
+如果重新跑的数据都在kafka中的时候,则直接指定offset就可以
+
+如果重新跑的数据一部分在kafka,更早的数据kafka中没有,就需要从hive中重新导入(hive保存全部历史数据)
+
+1. 被关联流 
+
+是写入到hbase表中
+
+那么涉及到重新读取hive表,并写入到hbase中,且要实时更新hbase,保证最新的hbase表的状态.
+
+从上面的表述发现,都要涉及读取hive,一个写入到kafka重新消费,一个是写入到hbase
+
+但是这两个地方都有个关键的点,如何确保在导入历史数据的过程中,实时的数据和历史数据的准确衔接.写入hbase可以利用幂等性,hive的数据和kafka实时的数据,可以有部分重复,导入到hbase中,重复的数据不会有影响. da
+
+一方面,如何确保开始向kafka导入hive的数据的那一刻时间的实时kafka数据能准确的与历史数据对接准确.另一方面,kafka的数据是以数据进入kafka的时间做为时间戳,而hive的数据,则是基于业务时间.
+
+基于上面的思考,将hive的历史数据导入kafka并可以和kafka实时数据做无缝衔接是很难实现.
+
+退而求其次,驱动流的重现消费,时间跨度不能超过kafka队列中最长的时间.(从生产角度看也应该如此,实时任务一旦停止,重新消费的时间都不会超过kafka队列最大存储时间).
+
+***所以,驱动流只需要做好指定kafka的offset,被关联流则是需要做到hive2hbase hbase2hbase***
+
+hive2hbase 和 hbase2hbase 不是单纯的进行数据的同步,而是需要根据逻辑重新组合.
+
+而且为了提高同步效率,hive2hbase 和hbase2hbase不能用hbase的api来同步,而是MR.
+
+这是之前写的同步程序,在我原来的电脑上,回去找下源码
+
+```shell
+[simp_admin@cdh2 sync_hive_to_hbase]$ cat README 
+java -cp tools.jar com.yhl.bulkload_auto.Main_Hive2Hbase \
+#这是hive内部表的hdfs地址，利用desc hivetable命令查找
+hdfs://cdh1.newchinalife.com:8020/user/hive/warehouse/nci_hive_dfs_mob.db/test_yhl_hive_inner \
+#这是hfile在hdfs的临时存放地址
+hdfs://cdh1.newchinalife.com:8020/tmp \
+#这是需要到出到的hbase表（若没有会自动创建）
+test_yhl2 \
+#这是列族(只支持单列族)
+info \
+#这是hbase的列名，需要到hive中查找
+v1,v2
+
+
+[simp_admin@cdh2 sync_hive_to_hbase]$ cd ../
+[simp_admin@cdh2 yhl]$ cd sync_hbase_to_hbase/
+[simp_admin@cdh2 sync_hbase_to_hbase]$ cat README 
+java -cp tools.jar com.yhl.bulkload_auto.Main_Hbase2Hbase \
+#hive的地址(这里是测试环境)
+10.1.100.11:10000/nci_hive_dfs_mob \
+#hive的用户
+simp_admin \
+#hive的密码
+ncl@1234 \
+#hive在hdfs的基础地址
+hdfs://cdh1.newchinalife.com:8020/user/hive/warehouse \
+#hfile在hdfs的临时地址
+hdfs://cdh1.newchinalife.com:8020/tmp \
+#source的hbase 被拷贝的表
+test_yhl \
+#sink的hbase 拷贝到的表
+test_yhl3 \
+#列族(只支持单列族)
+info \
+#列名(通过hive来查)
+v1,v2
+```
+
+1. 被关联流的组合逻辑 core 
+
+都是inner join
+
+> 1) 根据sql 来分析用到的表和字段
+> 
+> 
+> 2) 指定根据hbase来重新组合还是hive来作为源表
+> 
+> 3) 表字段分析
+>
+
+对hbase表建立hive外部表 或直接用hive表
+
+截取表count数的10% 20% 30% 用sql分析
+
+select f1,f2 from t1 join t2 on t1.f1 = t2.f2
+
+关联字段和主键的关系
+
+分析表主键字段
+
+分析表的关联字段
+
+1. 如果t1表的主键和t2表的主键 进行关联 说明是一一关联
+2. 如果t1表的主键和t2表的非主键进行关联(反之亦然)
+    
+    则分析t2表的非主键的关联字段和t2表的主键的关系
+    
+    1) 如果t2表的主键和该表的关联字段是一一对应的关系 (考上面的取样分析)
+    
+    或者近似一一对应关系
+    
+    就根据t2的关联字段重新组织
+    
+    2) 如果t2表的主键和关联字段的值去重后差距很大的话,例如student和class
+    
+    student是主键,class是关联字段的,一个class可以对应n多个student,
+    
+    这样的话,就需要看select查询的字段了,如果查询的字段和主键字段差距不大的话,就将关联字段和select字段拼接在一起,作为rowkey,总之,就是要减少列的个数,增加rowkey的个数.
+    
+    但是前提是驱动流里的字段中是否有select字段.
+    
+    也就是说,程序在一开始就要全部扫到驱动流和被关联表之间所有可以匹配上的字段.
+    
+    然后根据关联字段价格其他可以匹配上的字段,组合成rowkey,这个rowkey尽量可以覆盖所有的表数据,从而可以根据rowkey可以快速的找到数据.
+    
+    注意:cell中的数据,存储的是整个行数据,并以json格式存储.
+    
+    rowkey是关联字段值
+    
+    列是表的主键字段值
+    
+    1. 如果关联字段的值和主键字段的值是一一对应,或者是有不大的count差距的话,可以直接拼接
+        
+        所以这就需要count关联字段的值和主键字段的值.
+        
+    2. 如果有比较大的差距的话,可以采取下面的方式,看驱动流和被关联表都存在的字段A,如果A字段和关联字段进行拼接后,可以达到和主键字段count数一一对应或接近的话,这是第一步,第一步的拼接方式没有业务逻辑依据,所以为了让它有意义,可以看select的字段,因为原先如果只是根据关联字段作为rowkey进行查找的话,势必出来多个结果,但是如果select字段的值,在这多个结果中是一样的话,就不必须去取多个值,只获取一个就可以.所以当完成第一步之后,为了保证第一步有业务意义(select字段和主键是多对一的,关联字段和主键也是多对一的,就要count select字段的值和主键字段的值,并要对比select 的字段和关联字段的count数是否接近)
+    3. 如果select字段和主键字段的count数接近或着一一对应的,且关联字段的count数和select字段的count数差距很大的话,势必每次返回的结果都是n条,如果实时处理的时候,每次都返回多条然后拉到本地过滤处理的话,处理延时会很大,这样的话,最好的方法是利用hbase的协处理器,将处理逻辑方法指定的hbase表中处理.
+    
+    | 配置(config) | hive | hbase | hadoop | yarn | spark |
+    | --- | --- | --- | --- | --- | --- |
+    | sql | create sql (固定格式) | join sql(固定格式)
+    
+    sql解析
+    
+    建立外部表
+    
+    count 各个字段,按照上面的逻辑处理
+    
+    第一种情况,不需要特殊处理,按照业务逻辑重新建表并组织并导入数据.(生成离线的和kafka实时两个部分)
+    
+    第二种情况,需要将多个字段进行拼接作为rowkey.(生成离线的和kafka实时两个部分)
+    
+    第三种情况,也不需要特殊处理(无法特殊处理,如果按照第二种情况添加其他字段的话,就没有业务意义),但是为了减少IO,将处理的逻辑封装到协处理器中. ps:  这里是写入,生成协处理器是在读取阶段
