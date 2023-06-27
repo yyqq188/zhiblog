@@ -40,10 +40,10 @@ favicon:
   # small: /imgs/icons/favicon_16x16_next.png
   # medium: /imgs/icons/favicon_32_32_next.png
   # appleTouchIcon: /imgs/icons/apple_touch_icon_next.png
-  icon: /imgs/yyqq188_avatar.jpeg
-  small: /imgs/yyqq188_avatar.jpeg
-  medium: /imgs/yyqq188_avatar.jpeg
-  appleTouchIcon: /imgs/yyqq188_avatar.jpeg
+  icon: /imgs/icons/yyqq188_avatar.jpeg
+  small: /imgs/icons/yyqq188_avatar.jpeg
+  medium: /imgs/icons/yyqq188_avatar.jpeg
+  appleTouchIcon: /imgs/icons/yyqq188_avatar.jpeg
   
 
 # 自定义 Logo （目前只支持 Mist 页面模式）
