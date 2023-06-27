@@ -267,7 +267,7 @@ footer:
   # Beian ICP and gongan information for Chinese users. 
   # See: https://beian.miit.gov.cn, http://www.beian.gov.cn
   beian:
-    enable: true
+    enable: false
     # ICP 备案的具体信息
     icp: 粤ICP备 18047355-1 号
     # 公安网备的省份简称
@@ -278,7 +278,7 @@ footer:
   # 站点支持供应商列表
   # Vendors list who support website. 
   vendors:
-    enable: true
+    enable: false
     # 支持说明
     # Some support information description.
     title: 提供CDN/云资源支持
@@ -340,26 +340,26 @@ postFooter:
 
 # 捐赠信息设置
 # Donate (Sponsor) settings.
-# rewardSets:
-#   # 是否开启捐赠按钮，开启后将在每个文章页面底部显示
-#   # If true, a donate button will be displayed 
-#   # in every article by default.
-#   enable: true
-#   # 是否开启捐赠方式的动画效果
-#   # If true, the donate type title will with animation.
-#   animation: true
-#   # 捐赠信息的描述，支持 HTML 语法
-#   # Comment for donate and suppport HTML syntax
-#   comment: '<i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))'
-#   # 捐赠方式
-#   # 用例： `名称:图像地址`
-#   # Donate type
-#   # Usage: `name:image url`
-#   reward:
-#     wechatpay: /imgs/wechat-pay.png
-#     alipay: /imgs/ali-pay.png
-#     #paypal: /images/paypal.png
-#     #bitcoin: /images/bitcoin.png
+rewardSets:
+  # 是否开启捐赠按钮，开启后将在每个文章页面底部显示
+  # If true, a donate button will be displayed 
+  # in every article by default.
+  enable: false
+  # 是否开启捐赠方式的动画效果
+  # If true, the donate type title will with animation.
+  animation: true
+  # 捐赠信息的描述，支持 HTML 语法
+  # Comment for donate and suppport HTML syntax
+  comment: '<i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))'
+  # 捐赠方式
+  # 用例： `名称:图像地址`
+  # Donate type
+  # Usage: `name:image url`
+  reward:
+    wechatpay: /imgs/wechat-pay.png
+    alipay: /imgs/ali-pay.png
+    #paypal: /images/paypal.png
+    #bitcoin: /images/bitcoin.png
 
 # 提供其它订阅站点文章的方式
 # 用例： `key: 名称 || 链接（图像地址）|| icon名称`
@@ -368,14 +368,14 @@ postFooter:
 followMe:
   #channel0: Twitter || https://twitter.com/username || fab fa-twitter
   #channel1: Telegram || https://t.me/channel_name || fab fa-telegram
-  channel2: WeChat || /images/wechat_channel.jpg || fab fa-weixin
-  channel3: RSS || /atom.xml || fa fa-rss
+  # channel2: WeChat || /images/wechat_channel.jpg || fab fa-weixin
+  # channel3: RSS || /atom.xml || fa fa-rss
 
 # 文章的在线编辑
 # Post edit
 # Easily browse and edit blog source code online.
 postEdit:
-  enable: true
+  enable: false
   url: https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/
 
 
