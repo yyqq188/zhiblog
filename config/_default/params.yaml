@@ -37,10 +37,14 @@ keywords: 大数据,开发,技术
 # Different size of favicon
 favicon:
   # icon: /imgs/icons/favicon.ico
+  # small: /imgs/icons/favicon_16x16_next.png
+  # medium: /imgs/icons/favicon_32_32_next.png
+  # appleTouchIcon: /imgs/icons/apple_touch_icon_next.png
   icon: /imgs/yyqq188_avatar.jpeg
-  small: /imgs/icons/favicon_16x16_next.png
-  medium: /imgs/icons/favicon_32_32_next.png
-  appleTouchIcon: /imgs/icons/apple_touch_icon_next.png
+  small: /imgs/yyqq188_avatar.jpeg
+  medium: /imgs/yyqq188_avatar.jpeg
+  appleTouchIcon: /imgs/yyqq188_avatar.jpeg
+  
 
 # 自定义 Logo （目前只支持 Mist 页面模式）
 # Custom Logo (Warning: Only support scheme Mist)
