@@ -626,7 +626,7 @@ quicklink:
 comments:
   # 开启评论组件
   # If true, will show comment component in post end.
-  enable: true   
+  enable: false   
   # 设置默认使用的评论插件
   # 可选值：livere | waline | utterances | artalk | giscus
   # Choose a comment system to be displayed by default.
@@ -657,21 +657,21 @@ comments:
 # 更多配置信息请参考：https://waline.js.org/
 # Waline comments system
 # More info seee: https://waline.js.org/
-# waline:
-#   pageView: true
-#   comment: true
-#   placeholder: "请文明发言哟 ヾ(≧▽≦*)o"
-#   sofa: "快来发表你的意见吧 (≧∀≦)ゞ"
-#   emoji: false
-#   imgUploader: false
-#   wordLimit: 200
-#   requiredMeta: ['nick', 'mail']
-#   reaction: true
-#   reactionText: [ '点赞', '踩一下', '得意', '不屑', '尴尬', '睡觉']
-#   reactionTitle: "你认为这篇文章怎么样？"
-#   # 请注意换成个人的 Waline Server 服务器地址
-#   # Please replace this with your waline server URL
-#   serverURL: https://walinejs.comment.lithub.cc
+waline:
+  pageView: true
+  comment: true
+  placeholder: "请文明发言哟 ヾ(≧▽≦*)o"
+  sofa: "快来发表你的意见吧 (≧∀≦)ゞ"
+  emoji: false
+  imgUploader: false
+  wordLimit: 200
+  requiredMeta: ['nick', 'mail']
+  reaction: true
+  reactionText: [ '点赞', '踩一下', '得意', '不屑', '尴尬', '睡觉']
+  reactionTitle: "你认为这篇文章怎么样？"
+  # 请注意换成个人的 Waline Server 服务器地址
+  # Please replace this with your waline server URL
+  serverURL: https://walinejs.comment.lithub.cc
 
 # Artalk 评论插件
 # 更多配置信息请参考：https://artalk.js.org
@@ -686,8 +686,8 @@ comments:
 # 更多配置信息请参考：
 # LiveRe comments system
 # You can get your uid from https://livere.com/
-livere:
-  uid: # <your_uid>
+# livere:
+#   uid: # <your_uid>
 
 # Utterances 评论插件
 # 更多配置信息请参考：https://utteranc.es
