@@ -178,7 +178,7 @@ socials:
 socialIcons:
   # 是否支持图标显示
   # Enable icon display
-  enable: true
+  enable: false
   # 只显示图标
   # Only show icon
   iconsOnly: false
