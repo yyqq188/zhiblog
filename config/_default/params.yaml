@@ -28,10 +28,10 @@ darkmode: true
 
 # 站点基本信息
 # Site Information Settings
-author: NexT 主题
-subtitle: 为 Hugo 打造的主题
-description: 保持简单的易用性和强大的功能。
-keywords: Hugo,NexT,主题,简单,强大
+author: yyqq188
+subtitle: 数据
+description: 关于数据开发的思考
+keywords: 大数据,开发,技术
 
 # 不同尺寸站点图标
 # Different size of favicon
@@ -162,9 +162,9 @@ siteState:
 # Key is the link label order.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 socials: 
-  social0: Github || https://github.com/elkan1788 || fab fa-github
+  social0: Github || https://github.com/yyqq188 || fab fa-github
   #social1: E-Mail || mailto:yourname@gmail.com || fa fa-envelope
-  social2: 知乎 || https://www.zhihu.com/people/lisenhui || fa fa-book
+  social2: 本站 || https://zhiblog.top || fa fa-book
   #Google: https://plus.google.com/yourname || fab fa-google
   #Twitter: https://twitter.com/yourname || fab fa-twitter
   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
@@ -188,25 +188,25 @@ socialIcons:
 
 # 友情链接设置
 # Friend links setting
-linksSets:
-  # Fontawsome图标名称
-  # Icon name in Font Awesome
-  # See: https://fontawesome.com/
-  icon: fa fa-globe
-  # 显示标题
-  # Show title
-  title: 友情链接
-  # 可选值： block | inline
-  # Available values: block | inline
-  layout: inline
+# linksSets:
+#   # Fontawsome图标名称
+#   # Icon name in Font Awesome
+#   # See: https://fontawesome.com/
+#   icon: fa fa-globe
+#   # 显示标题
+#   # Show title
+#   title: 友情链接
+#   # 可选值： block | inline
+#   # Available values: block | inline
+#   layout: inline
 
-# 友情链接地址
-# 用法： `Key: 显示名称 || 链接地址`
-# Links of your friends
-# Usage: `Key: name || permalink`
-links: 
-  link0: Hugo-NexT || https://gitee.com/hugo-next/hugo-theme-next
-  link1: 凡梦星尘空间站 || https://lisenhui.cn
+# # 友情链接地址
+# # 用法： `Key: 显示名称 || 链接地址`
+# # Links of your friends
+# # Usage: `Key: name || permalink`
+# links: 
+#   link0: Hugo-NexT || https://gitee.com/hugo-next/hugo-theme-next
+#   link1: 凡梦星尘空间站 || https://lisenhui.cn
 
 # 文章目录显示
 # Table of Contents in the Sidebar
