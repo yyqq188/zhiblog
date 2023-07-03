@@ -13,6 +13,7 @@ tags:
 
 url: post/hello-world.html
 toc: true
+extlink: https://baidu.com
 weight: 2
 ---
 
