@@ -117,7 +117,35 @@ Relation[levelid#20,levelname#21] json
 
 
 本质上就是生成实时索引表  也是个通用的模版
+
 然后每次都是去join的时候,先join二级索引表
+
 最好是将这个二级join的步骤放到协处理器中 写个通用的模版
+
 然后配合helper 也是个通用的模版
+
 加上异步操作
+
+
+## 示范例子
+```sql
+SELECT c.category_name, p.product_name, SUM(o.quantity) AS total_quantity
+FROM orders o
+JOIN products p ON o.product_id = p.product_id
+JOIN categories c ON p.category_id = c.category_id
+GROUP BY c.category_name, p.product_name
+```
+从中可以看出,如果关联的两方中有一方是主键字段的话,且是被关联的一方,被关联的一方就直接以主键为rowkey组织即可(其实就是不用做二级索引)
+
+程序上的话分两个部分:
+
+1. 区分哪个是驱动方,哪个是被关联方
+
+2. 被关联方是否是以主键字段关联
+
+3. 被关联方是以主键关联,不需要建立二级索引
+
+4. 被关联方不是以主键关联,就要建立二级索引
+
+
+
