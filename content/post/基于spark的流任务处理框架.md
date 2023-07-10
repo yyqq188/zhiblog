@@ -23,3 +23,20 @@ toc: true
 3. scala语言本身的应用范围和使用人员相比sql或java来讲很受局限，导致实时项目很难找到合适的后续开发人员。
 
 
+
+目前整体设计思路已经确定
+数据从hive到hbase的批+流✅
+数据从hbase开始建立二级索引✅
+建立二级索引的逻辑✅
+
+接下来重点考虑验证
+- 数据质量管理
+|参考|涉及到的技术|
+|---|---|
+|apache griffin|spark ,livy, es|
+- 数据血缘分析
+|参考|涉及到的技术|
+|---|---|
+|apache atlas|hbase ,solr, kafka|
+- OLAP
+clickhouse , presto,impala
