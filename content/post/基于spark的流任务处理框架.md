@@ -34,12 +34,16 @@ toc: true
 
 接下来重点考虑验证
 - 数据质量管理
+
 |参考|涉及到的技术|
-|!---!|!---!|
-|apache griffin|spark ,livy, es|
+|---|---|
+|apache griffin|spark,livy,es
+
 - 数据血缘分析
-|参考|涉及到的技术|
-|!---!|!---!|
-|apache atlas|hbase ,solr, kafka|
+
+|参考|涉及到的技术
+|---|---
+|apache atlas|hbase,solr,kafka
 - OLAP
-clickhouse , presto,impala
+
+clickhouse,presto,impala
